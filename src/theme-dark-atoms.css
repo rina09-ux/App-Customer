@@ -1,0 +1,312 @@
+/* NusaSec Customer — Dark atom consistency layer. */
+
+/*
+ * FINAL DARK NORMALIZATION
+ * Every neutral surface in the Customer app must resolve to the Dark design tokens.
+ * Intentional technical/code surfaces are kept separately below.
+ */
+html.dark #root .bg-white,
+html.dark #root .bg-white\/95,
+html.dark #root .bg-white\/90,
+html.dark #root .bg-white\/80,
+html.dark #root .bg-gray-50,
+html.dark #root .bg-gray-100,
+html.dark #root .bg-neutral-50,
+html.dark #root .bg-neutral-100,
+html.dark #root .bg-zinc-50,
+html.dark #root .bg-zinc-100 {
+  background: var(--ds-surface) !important;
+  color: var(--ds-text) !important;
+}
+
+html.dark #root .bg-slate-50,
+html.dark #root .bg-slate-100,
+html.dark #root .bg-slate-200,
+html.dark #root .bg-gray-200,
+html.dark #root .bg-neutral-200,
+html.dark #root .bg-zinc-200 {
+  background: var(--ds-surface-muted) !important;
+  color: var(--ds-text-secondary) !important;
+}
+
+html.dark #root .bg-slate-700,
+html.dark #root .bg-slate-800,
+html.dark #root .bg-slate-800\/80,
+html.dark #root .bg-slate-800\/60,
+html.dark #root .bg-gray-700,
+html.dark #root .bg-gray-800,
+html.dark #root .bg-neutral-700,
+html.dark #root .bg-neutral-800,
+html.dark #root .bg-zinc-700,
+html.dark #root .bg-zinc-800 {
+  background: var(--ds-surface-muted) !important;
+  color: var(--ds-text-secondary) !important;
+}
+
+html.dark #root .bg-slate-900,
+html.dark #root .bg-gray-900,
+html.dark #root .bg-neutral-900,
+html.dark #root .bg-zinc-900 {
+  background: var(--ds-surface) !important;
+  color: var(--ds-text) !important;
+}
+
+html.dark #root .bg-slate-950,
+html.dark #root .bg-gray-950,
+html.dark #root .bg-neutral-950,
+html.dark #root .bg-zinc-950,
+html.dark #root .bg-black {
+  background: var(--ds-surface-code) !important;
+  color: var(--ds-text) !important;
+}
+
+/* Arbitrary light backgrounds are never allowed to remain light in Dark mode. */
+html.dark #root [class*="bg-[#f"],
+html.dark #root [class*="bg-[#e"],
+html.dark #root [class*="bg-[rgb(2"],
+html.dark #root [class*="bg-[rgb(24"] {
+  background: var(--ds-surface-muted) !important;
+  color: var(--ds-text) !important;
+}
+
+/* Borders: every neutral border follows Dark contrast. */
+html.dark #root .border-white,
+html.dark #root .border-gray-50,
+html.dark #root .border-gray-100,
+html.dark #root .border-neutral-50,
+html.dark #root .border-neutral-100,
+html.dark #root .border-zinc-50,
+html.dark #root .border-zinc-100,
+html.dark #root .border-slate-50,
+html.dark #root .border-slate-100,
+html.dark #root .border-slate-200 { border-color: var(--ds-border) !important; }
+
+html.dark #root .border-gray-300,
+html.dark #root .border-neutral-300,
+html.dark #root .border-zinc-300,
+html.dark #root .border-slate-300,
+html.dark #root .border-gray-400,
+html.dark #root .border-neutral-400,
+html.dark #root .border-zinc-400,
+html.dark #root .border-slate-400,
+html.dark #root .border-slate-500,
+html.dark #root .border-gray-500,
+html.dark #root .border-neutral-500,
+html.dark #root .border-zinc-500 { border-color: var(--ds-border-strong) !important; }
+
+html.dark #root .border-slate-700,
+html.dark #root .border-slate-700\/80,
+html.dark #root .border-slate-800,
+html.dark #root .border-slate-800\/80,
+html.dark #root .border-slate-800\/90,
+html.dark #root .border-gray-700,
+html.dark #root .border-gray-800,
+html.dark #root .border-neutral-700,
+html.dark #root .border-neutral-800,
+html.dark #root .border-zinc-700,
+html.dark #root .border-zinc-800 { border-color: var(--ds-border) !important; }
+
+/* Neutral text: no Light-only slate/gray text may survive in Dark. */
+html.dark #root .text-slate-950,
+html.dark #root .text-slate-900,
+html.dark #root .text-gray-950,
+html.dark #root .text-gray-900,
+html.dark #root .text-neutral-950,
+html.dark #root .text-neutral-900,
+html.dark #root .text-zinc-950,
+html.dark #root .text-zinc-900 { color: var(--ds-text) !important; }
+
+html.dark #root .text-slate-800,
+html.dark #root .text-slate-700,
+html.dark #root .text-slate-600,
+html.dark #root .text-gray-800,
+html.dark #root .text-gray-700,
+html.dark #root .text-gray-600,
+html.dark #root .text-neutral-800,
+html.dark #root .text-neutral-700,
+html.dark #root .text-neutral-600,
+html.dark #root .text-zinc-800,
+html.dark #root .text-zinc-700,
+html.dark #root .text-zinc-600 { color: var(--ds-text-secondary) !important; }
+
+html.dark #root .text-slate-500,
+html.dark #root .text-slate-400,
+html.dark #root .text-gray-500,
+html.dark #root .text-gray-400,
+html.dark #root .text-neutral-500,
+html.dark #root .text-neutral-400,
+html.dark #root .text-zinc-500,
+html.dark #root .text-zinc-400 { color: var(--ds-text-muted) !important; }
+
+/* Intentional white text remains untouched; it is used by brand/status controls. */
+
+/* Technical-dark code/terminal surfaces remain deeper than normal panels. */
+html.dark #root .ds-code,
+html.dark #root .ds-technical-dark,
+html.dark #root pre.bg-slate-900,
+html.dark #root pre.bg-slate-950,
+html.dark #root .font-mono.bg-slate-900,
+html.dark #root .font-mono.bg-slate-950 {
+  background: var(--ds-surface-code) !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border) !important;
+}
+
+/* Brand / AI / semantic status tokens for legacy utilities. */
+html.dark #root .text-blue-300,
+html.dark #root .text-blue-400,
+html.dark #root .text-blue-500 { color: var(--ds-brand) !important; }
+html.dark #root .bg-blue-400,
+html.dark #root .bg-blue-500,
+html.dark #root .bg-blue-600,
+html.dark #root .bg-blue-700 { background: var(--ds-brand) !important; color: #fff !important; }
+html.dark #root .border-blue-400,
+html.dark #root .border-blue-500,
+html.dark #root .border-blue-600,
+html.dark #root .border-blue-700 { border-color: var(--ds-brand) !important; }
+
+html.dark #root .text-indigo-300,
+html.dark #root .text-indigo-400,
+html.dark #root .text-indigo-500 { color: var(--ds-ai) !important; }
+html.dark #root .bg-indigo-400,
+html.dark #root .bg-indigo-500,
+html.dark #root .bg-indigo-600,
+html.dark #root .bg-indigo-700 { background: var(--ds-ai) !important; color: #fff !important; }
+html.dark #root .border-indigo-400,
+html.dark #root .border-indigo-500,
+html.dark #root .border-indigo-600,
+html.dark #root .border-indigo-700 { border-color: var(--ds-ai-border) !important; }
+
+html.dark #root .text-emerald-300,
+html.dark #root .text-emerald-400,
+html.dark #root .text-emerald-500 { color: var(--ds-success) !important; }
+html.dark #root .text-amber-300,
+html.dark #root .text-amber-400,
+html.dark #root .text-amber-500 { color: var(--ds-warning) !important; }
+html.dark #root .text-rose-300,
+html.dark #root .text-rose-400,
+html.dark #root .text-rose-500,
+html.dark #root .text-red-300,
+html.dark #root .text-red-400,
+html.dark #root .text-red-500 { color: var(--ds-danger) !important; }
+html.dark #root .text-cyan-300,
+html.dark #root .text-cyan-400,
+html.dark #root .text-cyan-500,
+html.dark #root .text-sky-300,
+html.dark #root .text-sky-400,
+html.dark #root .text-sky-500 { color: var(--ds-info) !important; }
+
+html.dark #root .bg-emerald-900,
+html.dark #root .bg-emerald-950 { background: var(--ds-success-soft) !important; border-color: var(--ds-success-border) !important; }
+html.dark #root .bg-amber-900,
+html.dark #root .bg-amber-950 { background: var(--ds-warning-soft) !important; border-color: var(--ds-warning-border) !important; }
+html.dark #root .bg-rose-900,
+html.dark #root .bg-rose-950,
+html.dark #root .bg-red-900,
+html.dark #root .bg-red-950 { background: var(--ds-danger-soft) !important; border-color: var(--ds-danger-border) !important; }
+html.dark #root .bg-purple-900,
+html.dark #root .bg-purple-950 { background: var(--ds-ai-soft) !important; border-color: var(--ds-ai-border) !important; }
+html.dark #root .bg-cyan-900,
+html.dark #root .bg-cyan-950,
+html.dark #root .bg-sky-900,
+html.dark #root .bg-sky-950 { background: var(--ds-info-soft) !important; border-color: var(--ds-info-border) !important; }
+
+html.dark #root .border-emerald-700,
+html.dark #root .border-emerald-800,
+html.dark #root .border-emerald-900 { border-color: var(--ds-success-border) !important; }
+html.dark #root .border-amber-700,
+html.dark #root .border-amber-800,
+html.dark #root .border-amber-900 { border-color: var(--ds-warning-border) !important; }
+html.dark #root .border-rose-700,
+html.dark #root .border-rose-800,
+html.dark #root .border-rose-900,
+html.dark #root .border-red-700,
+html.dark #root .border-red-800,
+html.dark #root .border-red-900 { border-color: var(--ds-danger-border) !important; }
+html.dark #root .border-purple-700,
+html.dark #root .border-purple-800,
+html.dark #root .border-purple-900 { border-color: var(--ds-ai-border) !important; }
+html.dark #root .border-cyan-700,
+html.dark #root .border-cyan-800,
+html.dark #root .border-cyan-900,
+html.dark #root .border-sky-700,
+html.dark #root .border-sky-800,
+html.dark #root .border-sky-900 { border-color: var(--ds-info-border) !important; }
+
+/* Muted translucent neutrals become real Dark surfaces. */
+html.dark #root .bg-white\/40,
+html.dark #root .bg-white\/50,
+html.dark #root .bg-white\/60,
+html.dark #root .bg-white\/70,
+html.dark #root .bg-white\/80,
+html.dark #root .bg-slate-50\/40,
+html.dark #root .bg-slate-50\/60,
+html.dark #root .bg-slate-50\/80,
+html.dark #root .bg-slate-100\/40,
+html.dark #root .bg-slate-100\/60,
+html.dark #root .bg-slate-100\/80 { background: var(--ds-surface-muted) !important; }
+
+/* Root and nested information panels. */
+html.dark #root,
+html.dark body { background: var(--ds-bg) !important; color: var(--ds-text); }
+html.dark #root .fixed.inset-0 > div.bg-white,
+html.dark #root [role="dialog"].bg-white,
+html.dark #root [role="dialog"] .bg-white {
+  background: var(--ds-surface) !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border) !important;
+}
+html.dark #root .fixed.inset-0 > div .bg-slate-50,
+html.dark #root [role="dialog"] .bg-slate-50 { background: var(--ds-surface-muted) !important; }
+
+/* Theme-neutral controls. */
+html.dark #root input,
+html.dark #root textarea,
+html.dark #root select { background: var(--ds-surface) !important; color: var(--ds-text) !important; border-color: var(--ds-border) !important; }
+html.dark #root input::placeholder,
+html.dark #root textarea::placeholder { color: var(--ds-text-muted) !important; }
+html.dark #root option { background: var(--ds-surface) !important; color: var(--ds-text) !important; }
+
+html.dark #root button:disabled,
+html.dark #root input:disabled,
+html.dark #root select:disabled,
+html.dark #root textarea:disabled {
+  opacity: 1;
+  background: var(--ds-surface-muted) !important;
+  color: var(--ds-text-muted) !important;
+  border-color: var(--ds-border) !important;
+}
+
+/* Keep native focus visible and on-brand. */
+html.dark #root button:focus-visible,
+html.dark #root a:focus-visible,
+html.dark #root [role="button"]:focus-visible,
+html.dark #root input:focus-visible,
+html.dark #root select:focus-visible,
+html.dark #root textarea:focus-visible {
+  outline: 2px solid var(--ds-brand) !important;
+  outline-offset: 2px;
+}
+
+/* Legacy special views explicitly inherit the same dark canvas/surface system. */
+html.dark #action-center-view,
+html.dark #developer-api-view,
+html.dark #attack-paths-view,
+html.dark #compliance-trust-view,
+html.dark #settings-view {
+  background: var(--ds-bg) !important;
+  color: var(--ds-text) !important;
+}
+
+html.dark #action-center-view .fixed.inset-0 > div,
+html.dark #developer-api-view .fixed.inset-0 > div {
+  background: var(--ds-surface) !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border) !important;
+}
+
+/* Disabled controls stay readable instead of fading into the surface. */
+html.dark .ns-app-canvas button:disabled,
+html.dark .ns-app-canvas input:disabled,
+html.dark .ns-app-canvas select:disabled,
+html.dark .ns-app-canvas textarea:disabled { opacity: 1; color: var(--ds-text-muted) !important; }

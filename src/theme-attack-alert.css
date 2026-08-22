@@ -1,0 +1,30 @@
+/* NusaSec Customer — Attack Paths critical alert refinement */
+
+/* Light: critical alert must remain visible without becoming a heavy red box. */
+html:not(.dark) #attack-paths-view > .bg-slate-950 span.bg-rose-950\/80 {
+  background: #fff5f6 !important;
+  color: #b4233f !important;
+  border-color: transparent !important;
+  box-shadow: 0 1px 6px rgba(180, 35, 63, 0.08) !important;
+}
+
+/* Covers the current Tailwind combination when the rose class is applied directly. */
+html:not(.dark) #attack-paths-view span.bg-rose-950\/80.border-rose-800 {
+  background: #fff5f6 !important;
+  color: #b4233f !important;
+  border-color: transparent !important;
+  box-shadow: 0 1px 6px rgba(180, 35, 63, 0.08) !important;
+}
+
+/* Keep the critical icon/status language readable in Light without a red frame. */
+html:not(.dark) #attack-paths-view span.bg-rose-950\/80 .text-rose-400 {
+  color: #b4233f !important;
+}
+
+/* Dark: retain the security-alert character, but use a controlled dark-danger surface. */
+html.dark #attack-paths-view span.bg-rose-950\/80.border-rose-800 {
+  background: #3b0d19 !important;
+  color: #fda4af !important;
+  border-color: #7f1d2d !important;
+  box-shadow: none !important;
+}

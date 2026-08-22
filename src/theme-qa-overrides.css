@@ -1,0 +1,110 @@
+/*
+ * Theme QA layer
+ *
+ * This file intentionally contains ONLY explicit exceptions.
+ * Normal surfaces, text, controls and semantic states belong to design-system.css.
+ */
+
+/* Root document follows the active theme, including browser gutters. */
+html:not(.dark) body,
+body:not(.dark),
+[data-theme="light"] body {
+  background: var(--ds-bg) !important;
+  color: var(--ds-text) !important;
+  color-scheme: light;
+}
+html.dark body,
+body.dark,
+[data-theme="dark"] body {
+  background: var(--ds-bg) !important;
+  color: var(--ds-text) !important;
+  color-scheme: dark;
+}
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea { color-scheme: light; }
+html.dark input,
+html.dark select,
+html.dark textarea { color-scheme: dark; }
+
+/* Intentionally dark micro-surfaces in both themes. */
+html:not(.dark) #app-toast,
+html:not(.dark) #icon-rail .absolute.left-14.bg-slate-900,
+html:not(.dark) #settings-view .bg-slate-950 {
+  background: #0b1220 !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+html:not(.dark) #icon-rail #icon-rail-user-profile > div {
+  background: #0f172a !important;
+  color: #ffffff !important;
+}
+html:not(.dark) #sidebar-panel > div:first-child div.bg-slate-950 {
+  background: var(--ds-brand) !important;
+  color: #ffffff !important;
+}
+
+/* Data Explorer — developer surface becomes light, data remains technical. */
+html:not(.dark) #data-explorer-view .bg-slate-950,
+html:not(.dark) #data-explorer-view .bg-slate-900 {
+  background: var(--ds-surface-code) !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border) !important;
+}
+html:not(.dark) #data-explorer-view textarea,
+html:not(.dark) #data-explorer-view input,
+html:not(.dark) #data-explorer-view select {
+  background: #ffffff !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border-strong) !important;
+  caret-color: var(--ds-brand);
+}
+html:not(.dark) #data-explorer-view code { color: var(--ds-brand) !important; }
+
+/* PQC API — code/editor surfaces use the light technical surface. */
+html:not(.dark) #developer-api-view .bg-slate-950,
+html:not(.dark) #developer-api-view .bg-slate-900,
+html:not(.dark) #developer-api-view pre {
+  background: var(--ds-surface-code) !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border) !important;
+}
+html:not(.dark) #developer-api-view pre,
+html:not(.dark) #developer-api-view code { font-family: var(--ds-font-mono); }
+
+/* PQC SDK — keep its developer hero branded, but all ordinary panels follow tokens. */
+html:not(.dark) #developer-sdk-view .bg-slate-900 {
+  background: var(--ds-brand) !important;
+  color: #ffffff !important;
+  border-color: var(--ds-brand) !important;
+}
+html:not(.dark) #developer-sdk-view .bg-slate-950 {
+  background: var(--ds-surface-code) !important;
+  color: var(--ds-text) !important;
+  border-color: var(--ds-border) !important;
+}
+
+/* PQC Readiness — branded light hero; the dark hero remains untouched. */
+html:not(.dark) #pqc-readiness-view .bg-gradient-to-r {
+  background: linear-gradient(135deg, #f8fbfc 0%, #e6f3f5 55%, #efedfb 100%) !important;
+  color: var(--ds-text) !important;
+  border-color: #b9d5da !important;
+}
+html:not(.dark) #pqc-readiness-view .bg-gradient-to-r .text-white { color: var(--ds-text) !important; }
+html:not(.dark) #pqc-readiness-view .bg-gradient-to-r .text-purple-200,
+html:not(.dark) #pqc-readiness-view .bg-gradient-to-r .text-purple-300 { color: var(--ds-text-secondary) !important; }
+html:not(.dark) #pqc-readiness-view button[class*="bg-purple-600"] {
+  background: var(--ds-brand) !important;
+  color: #ffffff !important;
+  border-color: var(--ds-brand) !important;
+}
+html:not(.dark) #pqc-readiness-view button[class*="hover:bg-purple-500"]:hover { background: var(--ds-brand-strong) !important; }
+html:not(.dark) #pqc-readiness-view .bg-purple-50 { background: var(--ds-ai-soft) !important; }
+html:not(.dark) #pqc-readiness-view .border-purple-200 { border-color: #d6c8ed !important; }
+
+/* Preserve explicit technical-dark components in Light mode. */
+html:not(.dark) .ds-technical-dark {
+  background: #0b1220 !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}

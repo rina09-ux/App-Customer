@@ -1,0 +1,6 @@
+{
+  "name": "NusaSec Cloud Security & Quantum Platform",
+  "description": "Enterprise Cybersecurity, Cloud Posture, Trust Compliance, and Post-Quantum Cryptography (PQC) Customer Tower.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

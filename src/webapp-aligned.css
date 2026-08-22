@@ -1,0 +1,194 @@
+/* ============================================================
+   Web App alignment layer.
+   Ports the marketing Web App's card anatomy and motion language
+   (pill badges, mono tags, icon chips, shimmer CTAs, glow-pulse
+   status dots, border-beam premium framing, card hover-lift) onto
+   the Customer app's existing ds-* token system, so every piece
+   automatically follows the active Light/Dark theme.
+   ============================================================ */
+
+/* --- Eyebrow / section label (Web App: uppercase mono tracked label) --- */
+.ds-eyebrow {
+  font-family: var(--ds-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ds-brand);
+}
+
+/* --- Soft-tint pill badge (Web App: bg-color/10 border-color/30 text-color-600) --- */
+.ds-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-family: var(--ds-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--ds-brand-soft);
+  border: 1px solid var(--ds-brand);
+  color: var(--ds-brand);
+}
+.ds-pill-success { background: var(--ds-success-soft); border-color: var(--ds-success-border); color: var(--ds-success); }
+.ds-pill-warning { background: var(--ds-warning-soft); border-color: var(--ds-warning-border); color: var(--ds-warning); }
+.ds-pill-danger  { background: var(--ds-danger-soft);  border-color: var(--ds-danger-border);  color: var(--ds-danger); }
+.ds-pill-info    { background: var(--ds-info-soft);    border-color: var(--ds-info-border);    color: var(--ds-info); }
+.ds-pill-ai      { background: var(--ds-ai-soft);       border-color: var(--ds-ai-border);       color: var(--ds-ai); }
+
+/* --- Mono corner tag (Web App: "TIER 1" style micro-label on cards) --- */
+.ds-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ds-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
+  background: var(--ds-surface-alt);
+  color: var(--ds-text-secondary);
+}
+
+/* --- Icon chip (Web App: rounded-lg soft surface holding a lucide icon) --- */
+.ds-icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-brand-soft);
+  color: var(--ds-brand);
+  flex-shrink: 0;
+}
+
+/* --- Card hover-lift (Web App cyber-card feel, theme-aware) --- */
+.ds-card-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ds-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--ds-brand);
+  box-shadow: 0 16px 32px -18px var(--ds-focus-ring);
+}
+
+/* Broad-coverage version: catches existing rounded/bordered card
+   markup across the app's 60+ view files without needing to touch
+   each one individually. Skips interactive controls and the sidebar
+   rail so nav items and buttons keep their own hover treatment. */
+.ns-app-canvas .ds-view-enter [class*="rounded-2xl"][class*="border"],
+.ns-app-canvas .ds-view-enter [class*="rounded-xl"][class*="border"] {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ns-app-canvas .ds-view-enter [class*="rounded-2xl"][class*="border"]:hover,
+.ns-app-canvas .ds-view-enter [class*="rounded-xl"][class*="border"]:hover {
+  box-shadow: 0 14px 28px -16px var(--ds-focus-ring);
+}
+
+/* --- Shimmer sweep, for primary/upgrade CTAs (Web App .btn-shimmer) --- */
+@keyframes wa-shimmer-sweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+.ds-cta-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.ds-cta-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: wa-shimmer-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* --- Glow-pulse status dot (Web App ambient "live" indicator) --- */
+@keyframes wa-glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+.ds-live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: wa-glow-pulse 2.2s ease-in-out infinite;
+}
+
+/* --- Border-beam rotating gradient frame (Web App premium/upgrade framing) --- */
+@property --wa-beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes wa-border-beam-rotate {
+  to { --wa-beam-angle: 360deg; }
+}
+.ds-border-beam {
+  position: relative;
+  isolation: isolate;
+}
+.ds-border-beam::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--wa-beam-angle), transparent 0%, transparent 70%, var(--ds-brand) 82%, var(--ds-brand-soft) 88%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: wa-border-beam-rotate 4.5s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* --- Gentle float, used sparingly for hero/empty-state icons --- */
+@keyframes wa-float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.ds-float-slow { animation: wa-float-slow 6s ease-in-out infinite; }
+
+/* --- View enter transition, applied once at the routed-content level
+   in App.tsx so every section change gets the Web App's soft fade/rise
+   without editing all 30 view components individually. --- */
+@keyframes wa-view-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ds-view-enter {
+  animation: wa-view-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Scrollbar, aligned to brand accent on hover (Web App treatment) --- */
+.ns-app-canvas ::-webkit-scrollbar { width: 6px; height: 6px; }
+.ns-app-canvas ::-webkit-scrollbar-track { background: transparent; }
+.ns-app-canvas ::-webkit-scrollbar-thumb { background: var(--ds-border-strong); border-radius: 9999px; }
+.ns-app-canvas ::-webkit-scrollbar-thumb:hover { background: var(--ds-brand); }
+
+/* --- Primary buttons get a touch more Web App polish: slightly firmer
+   radius, a soft colored shadow, and a subtle press affordance. --- */
+.ns-app-canvas .ds-primary,
+.ns-app-canvas .ds-selected {
+  box-shadow: 0 8px 20px -10px var(--ds-focus-ring);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.ns-app-canvas .ds-primary:active,
+.ns-app-canvas .ds-selected:active {
+  transform: scale(0.98);
+}

@@ -1,0 +1,58 @@
+/* NusaSec Customer — Dark micro-artifact cleanup.
+   Purpose: Dark Mode gets its own values for small Light-mode leftovers.
+   Semantic success remains green; brand/selection remains blue. */
+
+html.dark .ns-app-canvas .bg-emerald-50,
+html.dark .ns-app-canvas .bg-emerald-100 { background-color: #062e26 !important; }
+html.dark .ns-app-canvas .text-emerald-500,
+html.dark .ns-app-canvas .text-emerald-600,
+html.dark .ns-app-canvas .text-emerald-700 { color: #34d399 !important; }
+html.dark .ns-app-canvas .border-emerald-100,
+html.dark .ns-app-canvas .border-emerald-200,
+html.dark .ns-app-canvas .border-emerald-300 { border-color: #116653 !important; }
+
+html.dark .ns-app-canvas .bg-teal-50,
+html.dark .ns-app-canvas .bg-teal-100 { background-color: #07343a !important; }
+html.dark .ns-app-canvas .text-teal-500,
+html.dark .ns-app-canvas .text-teal-600,
+html.dark .ns-app-canvas .text-teal-700 { color: #2dd4bf !important; }
+html.dark .ns-app-canvas .border-teal-100,
+html.dark .ns-app-canvas .border-teal-200,
+html.dark .ns-app-canvas .border-teal-300 { border-color: #155e66 !important; }
+
+/* Light-mode brand hex leftovers become Dark-mode brand blue. */
+html.dark .ns-app-canvas [class*="bg-[#0f6b78]"],
+html.dark .ns-app-canvas [class*="bg-[#0c6f7a]"] {
+  background-color: #2563eb !important;
+}
+html.dark .ns-app-canvas [class*="hover:bg-[#09545f]"]:hover,
+html.dark .ns-app-canvas [class*="hover:bg-[#09545f]"]:focus-visible {
+  background-color: #1d4ed8 !important;
+}
+html.dark .ns-app-canvas [class*="text-[#0f6b78]"],
+html.dark .ns-app-canvas [class*="text-[#0c6f7a]"] {
+  color: #60a5fa !important;
+}
+html.dark .ns-app-canvas [class*="border-[#0f6b78]"],
+html.dark .ns-app-canvas [class*="border-[#0c6f7a]"] {
+  border-color: #2563eb !important;
+}
+html.dark .ns-app-canvas [class*="ring-[#0f6b78]"],
+html.dark .ns-app-canvas [class*="ring-[#0c6f7a]"] {
+  --tw-ring-color: rgba(37, 99, 235, 0.22) !important;
+}
+
+/* Decorative green dots/tiles are allowed to remain semantic success, but use
+   Dark-specific shade rather than Light-mode neon surfaces. */
+html.dark .ns-app-canvas .bg-emerald-500 { background-color: #10b981 !important; }
+html.dark .ns-app-canvas .bg-emerald-600 { background-color: #059669 !important; }
+
+/* Green status text stays semantic; only its surface/border are darkened. */
+html.dark .ns-app-canvas .bg-emerald-950\/50 { background-color: rgba(6, 46, 38, 0.72) !important; }
+
+/* Neutral Light leftovers that often sit beside green status atoms. */
+html.dark .ns-app-canvas .bg-green-50,
+html.dark .ns-app-canvas .bg-green-100 { background-color: #062e26 !important; }
+html.dark .ns-app-canvas .text-green-600,
+html.dark .ns-app-canvas .text-green-700 { color: #34d399 !important; }
+html.dark .ns-app-canvas .border-green-200 { border-color: #116653 !important; }

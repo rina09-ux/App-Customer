@@ -1,0 +1,250 @@
+/* NusaSec Customer — FINAL explicit Light/Dark contract.
+   This layer is intentionally last in the stylesheet chain.
+   Light and Dark are separate visual specifications per view.
+   Do not use this layer to create a third theme. */
+
+/* ---------- Shared per-view canvas ---------- */
+html:not(.dark) #settings-view,
+html:not(.dark) #action-center-view,
+html:not(.dark) #analytics-view,
+html:not(.dark) #notifications-view,
+html:not(.dark) #compliance-trust-view,
+html:not(.dark) #pqc-readiness-view,
+html:not(.dark) #data-explorer-view,
+html:not(.dark) #developer-api-view,
+html:not(.dark) #developer-sdk-view,
+html:not(.dark) #billing-view,
+html:not(.dark) #organization-view,
+html:not(.dark) #assets-cloud-view,
+html:not(.dark) #risk-exposure-view,
+html:not(.dark) #identity-view,
+html:not(.dark) #evidence-view,
+html:not(.dark) #regulatory-view,
+html:not(.dark) #reports-view {
+  background: #f4f7f9 !important;
+  color: #17212b !important;
+}
+
+html.dark #settings-view,
+html.dark #action-center-view,
+html.dark #analytics-view,
+html.dark #notifications-view,
+html.dark #compliance-trust-view,
+html.dark #pqc-readiness-view,
+html.dark #data-explorer-view,
+html.dark #developer-api-view,
+html.dark #developer-sdk-view,
+html.dark #billing-view,
+html.dark #organization-view,
+html.dark #assets-cloud-view,
+html.dark #risk-exposure-view,
+html.dark #identity-view,
+html.dark #evidence-view,
+html.dark #regulatory-view,
+html.dark #reports-view {
+  background: #020617 !important;
+  color: #f8fafc !important;
+}
+
+/* ---------- Settings: theme cards and controls ---------- */
+html:not(.dark) #settings-view .bg-blue-50\/40,
+html:not(.dark) #settings-view .border-blue-600,
+html:not(.dark) #settings-view .bg-blue-600 {
+  border-color: #0c6f7a !important;
+}
+html:not(.dark) #settings-view .bg-blue-50\/40 { background: #e4f3f5 !important; }
+html:not(.dark) #settings-view .bg-blue-600 { background: #0c6f7a !important; color: #fff !important; }
+html:not(.dark) #settings-view .text-blue-600,
+html:not(.dark) #settings-view .text-blue-800 { color: #0c6f7a !important; }
+html:not(.dark) #settings-view .bg-white { background: #fff !important; color: #17212b !important; }
+html:not(.dark) #settings-view .bg-slate-50 { background: #f8fafc !important; }
+html:not(.dark) #settings-view .bg-slate-100 { background: #eef3f6 !important; }
+html:not(.dark) #settings-view .text-slate-900 { color: #17212b !important; }
+html:not(.dark) #settings-view .text-slate-700,
+html:not(.dark) #settings-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #settings-view .text-slate-500,
+html:not(.dark) #settings-view .text-slate-400 { color: #6f7f8c !important; }
+html:not(.dark) #settings-view input,
+html:not(.dark) #settings-view select,
+html:not(.dark) #settings-view textarea { background: #fff !important; color: #17212b !important; border-color: #d6e0e6 !important; }
+html:not(.dark) #settings-view option { background: #fff !important; color: #17212b !important; }
+
+html.dark #settings-view .bg-white { background: #0f172a !important; color: #f8fafc !important; }
+html.dark #settings-view .bg-slate-50,
+html.dark #settings-view .bg-slate-100 { background: #172033 !important; }
+html.dark #settings-view .bg-slate-900 { background: #0f172a !important; }
+html.dark #settings-view .bg-slate-800 { background: #111c2d !important; }
+html.dark #settings-view .text-slate-900,
+html.dark #settings-view .text-slate-800 { color: #f8fafc !important; }
+html.dark #settings-view .text-slate-700,
+html.dark #settings-view .text-slate-600,
+html.dark #settings-view .text-slate-500 { color: #cbd5e1 !important; }
+html.dark #settings-view .text-slate-400 { color: #94a3b8 !important; }
+html.dark #settings-view .border-slate-200,
+html.dark #settings-view .border-slate-100,
+html.dark #settings-view .border-slate-800 { border-color: #334155 !important; }
+html.dark #settings-view .bg-blue-600,
+html.dark #settings-view .border-blue-600 { background: #2563eb !important; border-color: #2563eb !important; color: #fff !important; }
+html.dark #settings-view input,
+html.dark #settings-view select,
+html.dark #settings-view textarea { background: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+html.dark #settings-view option { background: #0f172a !important; color: #f8fafc !important; }
+
+/* ---------- Compliance: selected framework is green in both themes ---------- */
+html:not(.dark) #compliance-trust-view button[class*="bg-emerald-950"] {
+  background: #0f766e !important;
+  color: #fff !important;
+  border-color: #0f766e !important;
+  box-shadow: 0 8px 20px rgba(15,118,110,.18) !important;
+}
+html:not(.dark) #compliance-trust-view button[class*="bg-emerald-950"] .text-emerald-400,
+html:not(.dark) #compliance-trust-view button[class*="bg-emerald-950"] .text-emerald-300,
+html:not(.dark) #compliance-trust-view button[class*="bg-emerald-950"] .text-white { color: #fff !important; }
+html:not(.dark) #compliance-trust-view .bg-white { background: #fff !important; }
+html:not(.dark) #compliance-trust-view .bg-slate-50 { background: #f8fafc !important; }
+html:not(.dark) #compliance-trust-view .text-slate-900 { color: #17212b !important; }
+html:not(.dark) #compliance-trust-view .text-slate-700,
+html:not(.dark) #compliance-trust-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #compliance-trust-view .text-slate-500,
+html:not(.dark) #compliance-trust-view .text-slate-400 { color: #6f7f8c !important; }
+
+html.dark #compliance-trust-view button[class*="bg-emerald-950"] {
+  background: #064e3b !important;
+  color: #ecfdf5 !important;
+  border-color: #10b981 !important;
+}
+html.dark #compliance-trust-view .bg-white { background: #0f172a !important; }
+html.dark #compliance-trust-view .bg-slate-50 { background: #172033 !important; }
+html.dark #compliance-trust-view .text-slate-900 { color: #f8fafc !important; }
+html.dark #compliance-trust-view .text-slate-700,
+html.dark #compliance-trust-view .text-slate-600,
+html.dark #compliance-trust-view .text-slate-500 { color: #cbd5e1 !important; }
+html.dark #compliance-trust-view .text-slate-400 { color: #94a3b8 !important; }
+
+/* ---------- PQC Readiness: Light hero is not a dark hero ---------- */
+html:not(.dark) #pqc-readiness-view > .bg-gradient-to-r {
+  background: linear-gradient(135deg, #f1edfc 0%, #ffffff 58%, #e4f3f5 100%) !important;
+  color: #17212b !important;
+  border-color: #d6c8ed !important;
+}
+html:not(.dark) #pqc-readiness-view > .bg-gradient-to-r .text-white { color: #17212b !important; }
+html:not(.dark) #pqc-readiness-view > .bg-gradient-to-r .text-purple-300,
+html:not(.dark) #pqc-readiness-view > .bg-gradient-to-r .text-purple-200 { color: #6d4acb !important; }
+html:not(.dark) #pqc-readiness-view > .bg-gradient-to-r .bg-purple-900\/40 { background: #f1edfc !important; border-color: #d6c8ed !important; }
+html:not(.dark) #pqc-readiness-view > .bg-gradient-to-r .text-amber-400 { color: #a16207 !important; }
+html:not(.dark) #pqc-readiness-view .bg-white { background: #fff !important; }
+html:not(.dark) #pqc-readiness-view .text-slate-900 { color: #17212b !important; }
+html:not(.dark) #pqc-readiness-view .text-slate-700,
+html:not(.dark) #pqc-readiness-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #pqc-readiness-view .text-slate-500,
+html:not(.dark) #pqc-readiness-view .text-slate-400 { color: #6f7f8c !important; }
+
+html.dark #pqc-readiness-view > .bg-gradient-to-r {
+  background: linear-gradient(135deg, #020617 0%, #2e1065 55%, #1e1b4b 100%) !important;
+  color: #f8fafc !important;
+}
+html.dark #pqc-readiness-view .bg-white { background: #0f172a !important; }
+html.dark #pqc-readiness-view .text-slate-900 { color: #f8fafc !important; }
+html.dark #pqc-readiness-view .text-slate-700,
+html.dark #pqc-readiness-view .text-slate-600 { color: #cbd5e1 !important; }
+html.dark #pqc-readiness-view .text-slate-500,
+html.dark #pqc-readiness-view .text-slate-400 { color: #94a3b8 !important; }
+
+/* ---------- Data Explorer: query console and result table ---------- */
+html:not(.dark) #data-explorer-view .bg-white { background: #fff !important; }
+html:not(.dark) #data-explorer-view textarea { background: #eef4f6 !important; color: #17212b !important; border-color: #d6e0e6 !important; }
+html:not(.dark) #data-explorer-view table { background: #fff !important; color: #17212b !important; }
+html:not(.dark) #data-explorer-view thead { background: #f8fafc !important; }
+html:not(.dark) #data-explorer-view tr:hover { background: #e4f3f5 !important; }
+html:not(.dark) #data-explorer-view .text-slate-900 { color: #17212b !important; }
+html:not(.dark) #data-explorer-view .text-slate-700,
+html:not(.dark) #data-explorer-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #data-explorer-view .text-slate-500,
+html:not(.dark) #data-explorer-view .text-slate-400 { color: #6f7f8c !important; }
+html:not(.dark) #data-explorer-view .bg-purple-100 { background: #f1edfc !important; }
+html:not(.dark) #data-explorer-view .text-purple-800 { color: #6d4acb !important; }
+
+html.dark #data-explorer-view .bg-white { background: #0f172a !important; }
+html.dark #data-explorer-view textarea { background: #0b1220 !important; color: #e0e7ff !important; border-color: #334155 !important; }
+html.dark #data-explorer-view table { background: #0b1220 !important; color: #f8fafc !important; }
+html.dark #data-explorer-view thead { background: #0f172a !important; }
+html.dark #data-explorer-view tr:hover { background: #172554 !important; }
+html.dark #data-explorer-view .text-slate-900 { color: #f8fafc !important; }
+html.dark #data-explorer-view .text-slate-700,
+html.dark #data-explorer-view .text-slate-600 { color: #cbd5e1 !important; }
+html.dark #data-explorer-view .text-slate-500,
+html.dark #data-explorer-view .text-slate-400 { color: #94a3b8 !important; }
+
+/* ---------- Notifications ---------- */
+html:not(.dark) #notifications-view .bg-white { background: #fff !important; }
+html:not(.dark) #notifications-view .bg-slate-100 { background: #eef3f6 !important; }
+html:not(.dark) #notifications-view .text-slate-900,
+html:not(.dark) #notifications-view .text-slate-800 { color: #17212b !important; }
+html:not(.dark) #notifications-view .text-slate-700,
+html:not(.dark) #notifications-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #notifications-view .text-slate-500,
+html:not(.dark) #notifications-view .text-slate-400 { color: #6f7f8c !important; }
+html:not(.dark) #notifications-view .bg-blue-50 { background: #e7f3f6 !important; color: #0c6f7a !important; border-color: #b9d9e3 !important; }
+html.dark #notifications-view .bg-white { background: #0f172a !important; }
+html.dark #notifications-view .bg-slate-100 { background: #172033 !important; }
+html.dark #notifications-view .text-slate-900,
+html.dark #notifications-view .text-slate-800 { color: #f8fafc !important; }
+html.dark #notifications-view .text-slate-700,
+html.dark #notifications-view .text-slate-600,
+html.dark #notifications-view .text-slate-500 { color: #cbd5e1 !important; }
+html.dark #notifications-view .text-slate-400 { color: #94a3b8 !important; }
+
+/* ---------- Action Center ---------- */
+html:not(.dark) #action-center-view .bg-white { background: #fff !important; }
+html:not(.dark) #action-center-view .bg-slate-50,
+html:not(.dark) #action-center-view .bg-slate-100 { background: #eef3f6 !important; }
+html:not(.dark) #action-center-view button.bg-slate-900,
+html:not(.dark) #action-center-view button.bg-blue-600 { background: #0c6f7a !important; color: #fff !important; }
+html:not(.dark) #action-center-view .text-slate-900,
+html:not(.dark) #action-center-view .text-slate-800 { color: #17212b !important; }
+html:not(.dark) #action-center-view .text-slate-700,
+html:not(.dark) #action-center-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #action-center-view .text-slate-500,
+html:not(.dark) #action-center-view .text-slate-400 { color: #6f7f8c !important; }
+html.dark #action-center-view .bg-white { background: #0f172a !important; }
+html.dark #action-center-view .bg-slate-50,
+html.dark #action-center-view .bg-slate-100 { background: #172033 !important; }
+html.dark #action-center-view button.bg-slate-900,
+html.dark #action-center-view button.bg-blue-600 { background: #2563eb !important; color: #fff !important; }
+html.dark #action-center-view .text-slate-900,
+html.dark #action-center-view .text-slate-800 { color: #f8fafc !important; }
+html.dark #action-center-view .text-slate-700,
+html.dark #action-center-view .text-slate-600,
+html.dark #action-center-view .text-slate-500 { color: #cbd5e1 !important; }
+html.dark #action-center-view .text-slate-400 { color: #94a3b8 !important; }
+html.dark #action-center-view .fixed.inset-0 > div { background: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+
+/* ---------- Analytics ---------- */
+html:not(.dark) #analytics-view .bg-white { background: #fff !important; }
+html:not(.dark) #analytics-view .bg-slate-200\/80 { background: #eef3f6 !important; }
+html:not(.dark) #analytics-view .text-slate-900 { color: #17212b !important; }
+html:not(.dark) #analytics-view .text-slate-700,
+html:not(.dark) #analytics-view .text-slate-600 { color: #465866 !important; }
+html:not(.dark) #analytics-view .text-slate-500,
+html:not(.dark) #analytics-view .text-slate-400 { color: #6f7f8c !important; }
+html:not(.dark) #analytics-view button.bg-slate-900 { background: #0c6f7a !important; color: #fff !important; }
+html:not(.dark) #analytics-view .bg-emerald-50 { background: #e7f6f1 !important; }
+html:not(.dark) #analytics-view .text-emerald-600 { color: #0f766e !important; }
+html.dark #analytics-view .bg-white { background: #0f172a !important; }
+html.dark #analytics-view .bg-slate-200\/80 { background: #172033 !important; }
+html.dark #analytics-view .text-slate-900 { color: #f8fafc !important; }
+html.dark #analytics-view .text-slate-700,
+html.dark #analytics-view .text-slate-600,
+html.dark #analytics-view .text-slate-500 { color: #cbd5e1 !important; }
+html.dark #analytics-view .text-slate-400 { color: #94a3b8 !important; }
+html.dark #analytics-view button.bg-slate-900 { background: #2563eb !important; color: #fff !important; }
+html.dark #analytics-view .recharts-cartesian-grid-horizontal line,
+html.dark #analytics-view .recharts-cartesian-grid-vertical line { stroke: #334155 !important; }
+
+/* ---------- Final neutral nested panels ---------- */
+html:not(.dark) #root .theme-neutral-panel { background: #fff !important; color: #17212b !important; border-color: #d6e0e6 !important; }
+html.dark #root .theme-neutral-panel { background: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+
+/* Never let a Light view silently inherit Dark-only text on its primary surfaces. */
+html:not(.dark) #root .theme-light-surface .text-white { color: #17212b !important; }
+html.dark #root .theme-dark-surface .text-black { color: #f8fafc !important; }

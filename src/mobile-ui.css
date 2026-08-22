@@ -1,0 +1,173 @@
+/* NusaSec Customer — mobile composition layer.
+   Desktop remains unchanged; these rules only target small touch screens. */
+
+@media (max-width: 767px) {
+  html, body, #root { min-width: 0; }
+  body { overflow-x: hidden; }
+
+  .ns-mobile-header { min-height: 56px; height: 56px; padding: 0 12px; }
+  #mobile-hamburger-btn,
+  .ns-mobile-header button { min-width: 40px; min-height: 40px; }
+  .ns-mobile-header > span { max-width: 58vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  #mobile-sidebar-drawer { width: min(88vw, 360px); max-width: 360px; min-width: 280px; }
+  #mobile-sidebar-drawer #sidebar-panel { width: 100%; max-width: none; padding-inline: 12px; }
+  #mobile-sidebar-drawer #sidebar-panel > .ns-sidebar-header { padding-inline: 8px; }
+  #mobile-sidebar-drawer .ns-sidebar-header .ds-title,
+  #mobile-sidebar-drawer .ns-sidebar-header .ds-muted { max-width: 220px; }
+
+  [id$="-view"] { width: 100%; max-width: none !important; padding: 16px !important; gap: 16px; }
+  [id$="-view"] > * { min-width: 0; max-width: 100%; }
+  [id$="-view"] h1 { font-size: 20px !important; line-height: 28px !important; }
+  [id$="-view"] h2 { font-size: 18px !important; line-height: 25px !important; }
+  [id$="-view"] h3 { line-height: 22px; }
+  [id$="-view"] p { overflow-wrap: anywhere; }
+
+  [id$="-view"] button,
+  [id$="-view"] select,
+  [id$="-view"] input,
+  [id$="-view"] textarea { min-height: 40px; max-width: 100%; }
+
+  [id$="-view"] > .flex.flex-col.sm\\:flex-row.sm\\:items-center.justify-between,
+  [id$="-view"] > .flex.flex-col.sm\\:flex-row.sm\\:items-center.justify-between.gap-4 { align-items: stretch; }
+
+  [id$="-view"] > .flex.flex-col.sm\\:flex-row.sm\\:items-center.justify-between > button,
+  [id$="-view"] > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between > .flex { width: 100%; min-width: 0; }
+
+  [id$="-view"] .grid { grid-template-columns: minmax(0, 1fr) !important; min-width: 0; }
+  [id$="-view"] .grid.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [id$="-view"] .grid.grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+
+  /* Data/table/code overflow only. */
+  [id$="-view"] .overflow-x-auto { -webkit-overflow-scrolling: touch; scrollbar-width: thin; min-width: 0; max-width: 100%; }
+  [id$="-view"] .overflow-x-auto:has(table),
+  [id$="-view"] .overflow-x-auto:has(pre) { overflow-x: auto; overflow-y: hidden; }
+  [id$="-view"] table { min-width: 640px; }
+
+  /* Filters/tabs/options must stay inside their parent box. */
+  [id$="-view"] .overflow-x-auto:has(button) { overflow-x: visible; overflow-y: visible; }
+  [id$="-view"] .flex:has(> button:nth-of-type(4)) { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+  [id$="-view"] .flex:has(> button:nth-of-type(4)) > button { flex: 0 1 auto; min-width: 0; max-width: 100%; white-space: normal; }
+  [id$="-view"] .flex:has(> button:nth-of-type(6)) > button { flex: 1 1 calc(50% - 4px); min-width: 88px; }
+
+  /* Any select in a mobile toolbar is allowed to shrink; it never defines viewport width. */
+  [id$="-view"] select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+  [id$="-view"] select option { max-width: 100%; }
+  #analytics-view > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between > .flex { width: 100%; min-width: 0; }
+  #analytics-view > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between > .flex > div { min-width: 0; max-width: 100%; width: 100%; }
+  #analytics-view > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between select { display: block; width: 100%; min-width: 0; }
+
+  [id$="-view"] .flex.flex-wrap { row-gap: 8px; min-width: 0; max-width: 100%; }
+  [id$="-view"] pre,
+  [id$="-view"] code { overflow-wrap: anywhere; word-break: break-word; }
+
+  #attack-paths-view .grid.md\\:grid-cols-5 { grid-template-columns: minmax(0, 1fr) !important; }
+  #attack-paths-view .grid.md\\:grid-cols-5 > div > button { width: 100%; }
+  #attack-paths-view .hidden.md\\:flex { display: none !important; }
+
+  #marketplace-view > .bg-gradient-to-r,
+  #migration-center-view > .bg-gradient-to-br,
+  #pqc-readiness-view > .bg-gradient-to-r,
+  #attack-paths-view > .bg-slate-950 { border-radius: 20px !important; padding: 18px !important; }
+
+  #data-explorer-view textarea { min-height: 120px; }
+
+  [role="dialog"],
+  .fixed.inset-0.z-50 > div.max-w-lg,
+  .fixed.inset-0.z-50 > div.max-w-2xl,
+  .fixed.inset-0.z-50 > div.max-w-3xl {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+  }
+
+  #app-toast { left: 12px !important; right: 12px !important; top: 12px !important; width: auto !important; max-width: none !important; }
+
+  /* Final overflow guard: mobile drawer uses the full Sidebar, not IconRail + Sidebar. */
+  .fixed.inset-0.z-50.lg\\:hidden > .relative.z-50.flex > #icon-rail { display: none !important; }
+  .fixed.inset-0.z-50.lg\\:hidden > .relative.z-50.flex { width: min(88vw, 360px); max-width: 360px; min-width: 280px; display: block; }
+  .fixed.inset-0.z-50.lg\\:hidden > .relative.z-50.flex #sidebar-panel { width: 100%; max-width: none; min-width: 0; }
+
+  /* Intrinsic-width guards for every mobile control. */
+  [id$="-view"] select,
+  [id$="-view"] input,
+  [id$="-view"] textarea,
+  [id$="-view"] button { min-width: 0; max-width: 100%; }
+  [id$="-view"] select { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  [id$="-view"] .flex,
+  [id$="-view"] .grid,
+  [id$="-view"] .flex > *,
+  [id$="-view"] .grid > * { min-width: 0; max-width: 100%; box-sizing: border-box; }
+
+  /* A toolbar may wrap; its children must never retain desktop intrinsic widths. */
+  [id$="-view"] .flex.flex-wrap > *,
+  [id$="-view"] .flex:has(> button) > * { min-width: 0; max-width: 100%; }
+
+  /* Telemetry / Analytics filter: cloud selector gets its own row and time range follows. */
+  #analytics-view > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between > .flex.flex-wrap { width: 100%; max-width: 100%; min-width: 0; }
+  #analytics-view > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between > .flex.flex-wrap > div:has(select) { width: 100%; max-width: 100%; min-width: 0; }
+  #analytics-view > .flex.flex-col.lg\\:flex-row.lg\\:items-center.justify-between > .flex.flex-wrap > div:has(select) select { width: 100%; min-width: 0; max-width: 100%; }
+
+  /* Generic filter bars remain directly usable when they have two or fewer categories. */
+  [id$="-view"] .flex:has(> button:nth-of-type(6)) { flex-wrap: wrap; width: 100%; max-width: 100%; }
+  [id$="-view"] .flex:has(> button:nth-of-type(6)) > button { flex: 1 1 calc(50% - 4px); width: auto; max-width: calc(50% - 4px); }
+
+  /* 3+ category filters collapse into the inline Filter control created by mobile-filter-inline.ts. */
+  .ns-mobile-filter-collapsed-source { display: none !important; }
+  .ns-mobile-inline-filter-host { position: relative; width: 100%; min-width: 0; }
+  .ns-mobile-inline-filter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--ds-border);
+    background: var(--ds-surface);
+    color: var(--ds-title);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .ns-mobile-inline-filter-button:active { transform: translateY(1px); }
+  .ns-mobile-inline-filter-count {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ds-brand-soft);
+    color: var(--ds-brand);
+    font-size: 10px;
+    font-weight: 800;
+  }
+  .ns-mobile-inline-filter-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 65;
+    padding: 14px;
+    border: 1px solid var(--ds-border);
+    border-radius: 16px;
+    background: var(--ds-surface);
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.14);
+  }
+  .ns-mobile-inline-filter-title { font-size: 13px; font-weight: 800; color: var(--ds-title); margin-bottom: 10px; }
+  .ns-mobile-inline-filter-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .ns-mobile-inline-filter-field { display: grid; gap: 5px; min-width: 0; }
+  .ns-mobile-inline-filter-field > span { font-size: 11px; font-weight: 700; color: var(--ds-text-muted); }
+  .ns-mobile-inline-filter-field select { width: 100%; min-width: 0; min-height: 40px; padding: 0 10px; border: 1px solid var(--ds-border); border-radius: 10px; background: var(--ds-surface-alt); color: var(--ds-title); }
+  .ns-mobile-inline-filter-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .ns-mobile-inline-filter-actions button { flex: 1; min-height: 40px; border-radius: 10px; font-size: 12px; font-weight: 700; }
+  .ns-mobile-inline-filter-reset { border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-title); }
+  .ns-mobile-inline-filter-apply { border: 1px solid var(--ds-brand); background: var(--ds-brand); color: var(--ds-on-brand); }
+}
+
+@media (min-width: 768px) {
+  #mobile-sidebar-drawer { width: auto; }
+  .ns-mobile-inline-filter-host { display: none !important; }
+}
