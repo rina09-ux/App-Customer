@@ -31,9 +31,36 @@ export interface CoreCloudAsset {
   status: string;
 }
 
+export interface CloudConnectionPayload {
+  provider: string;
+  account_ref: string;
+  name: string;
+  credential_mode: string;
+  credential_ref: string;
+  role_ref?: string;
+  external_id_ref?: string;
+  permission_profile?: string;
+  region_scope?: string[];
+  allowed_services?: string[];
+  region?: string;
+}
+
 export async function getCoreCloudAccounts(): Promise<CoreCloudAccount[]> {
   const body = await requestCore<{ items: CoreCloudAccount[] }>('/api/v1/customer/assets-cloud/accounts');
   return body.items || [];
+}
+
+export async function createCoreCloudAccount(payload: CloudConnectionPayload): Promise<{ id: number; identity_id: number; status: string; next: string }> {
+  return requestCore('/api/v1/customer/assets-cloud/accounts', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function validateCoreCloudAccount(accountId: number): Promise<{ account_id: number; identity_id: number; status: string; validated_at: string; evidence: Record<string, unknown> }> {
+  return requestCore(`/api/v1/customer/assets-cloud/accounts/${encodeURIComponent(accountId)}/validate`, {
+    method: 'POST',
+  });
 }
 
 export async function getCoreCloudAssets(params: {
