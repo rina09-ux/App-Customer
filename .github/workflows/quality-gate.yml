@@ -27,3 +27,5 @@ jobs:
         run: npm run build
       - name: Dependency audit
         run: npm audit --audit-level=high
+      - name: Action path audit
+        run: python3 scripts/action_path_audit.py --workspace . --repos . --fail-on-findings
