@@ -1,0 +1,1 @@
+Manual CI trigger marker. No application/runtime logic change.
