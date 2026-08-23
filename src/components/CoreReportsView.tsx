@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Calendar, Download, FileText, Plus, RefreshCw } from 'lucide-react';
 import { getCoreApiUrl } from '../lib/coreApi';
+import { requestCore } from '../lib/coreRequest';
 
 interface Schedule { id: number; report_type: string; frequency: string; recipients: string[]; enabled: boolean; next_run_at?: string | null; }
 interface ReportArtifact { document_id: number; report_key: string; format: string; artifact_hash: string; created_at: string; }
@@ -15,16 +16,11 @@ export const CoreReportsView: React.FC<{ showToast?: (msg: string) => void }> = 
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState<string | null>(null);
 
-  const request = async (path: string, init?: RequestInit) => {
-    const r = await fetch(`${getCoreApiUrl()}${path}`, { credentials: 'include', ...init, headers: { 'Content-Type': 'application/json', ...(init?.headers || {}) } });
-    const b = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(b?.detail || `Core request failed (${r.status})`);
-    return b;
-  };
+  const request = async <T,>(path: string, init?: RequestInit): Promise<T> => requestCore<T>(path, init);
 
   const load = useCallback(async () => {
     setLoading(true);
-    try { const b = await request('/api/v1/product-experience/reports/schedules'); setSchedules(b.items || []); }
+    try { const b = await request<{ items?: Schedule[] }>('/api/v1/product-experience/reports/schedules'); setSchedules(b.items || []); }
     catch (e) { showToast(e instanceof Error ? e.message : 'Gagal memuat schedules.'); }
     finally { setLoading(false); }
   }, [showToast]);
@@ -34,7 +30,7 @@ export const CoreReportsView: React.FC<{ showToast?: (msg: string) => void }> = 
   const generate = async (reportKey: 'executive' | 'security' | 'pqc') => {
     setGenerating(reportKey);
     try {
-      const b = await request('/api/v1/product-experience/reports/generate', { method: 'POST', body: JSON.stringify({ report_key: reportKey }) });
+      const b = await request<ReportArtifact>('/api/v1/product-experience/reports/generate', { method: 'POST', body: JSON.stringify({ report_key: reportKey }) });
       setArtifact(b);
       showToast(`${reportKey.toUpperCase()} report berhasil dibuat sebagai PDF di Core.`);
     } catch (e) { showToast(e instanceof Error ? e.message : 'Generate report gagal.'); }
@@ -43,19 +39,22 @@ export const CoreReportsView: React.FC<{ showToast?: (msg: string) => void }> = 
 
   const downloadArtifact = async () => {
     if (!artifact) return;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 30000);
     try {
-      const r = await fetch(`${getCoreApiUrl()}/api/v1/product-experience/reports/documents/${artifact.document_id}/download`, { credentials: 'include' });
+      const r = await fetch(`${getCoreApiUrl()}/api/v1/product-experience/reports/documents/${artifact.document_id}/download`, { credentials: 'include', signal: controller.signal, headers: { Accept: 'application/pdf' } });
       if (!r.ok) throw new Error('Download report gagal.');
       const blob = await r.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = `nusasec-${artifact.report_key}.pdf`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     } catch (e) { showToast(e instanceof Error ? e.message : 'Download report gagal.'); }
+    finally { window.clearTimeout(timeout); }
   };
 
   const createSchedule = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await request('/api/v1/product-experience/reports/schedules', { method: 'POST', body: JSON.stringify({ report_type: type, frequency: freq, recipients_json: [recipient] }) });
+      await request('/api/v1/product-experience/reports/schedules', { method: 'POST', body: JSON.stringify({ report_type: type, frequency: freq, recipients_json: [recipient.trim()] }) });
       showToast('Jadwal laporan disimpan di Core.'); setOpen(false); setRecipient(''); await load();
     } catch (e) { showToast(e instanceof Error ? e.message : 'Schedule gagal.'); }
   };
