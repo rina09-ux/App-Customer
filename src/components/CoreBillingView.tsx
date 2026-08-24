@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CreditCard, Gem, RefreshCw, WalletCards, Receipt, Gauge, Ban, RotateCcw } from 'lucide-react';
-import { getCoreApiUrl } from '../lib/coreApi';
+import { requestCore } from '../lib/coreRequest';
 
 interface Props { showToast?: (msg: string) => void; }
 
@@ -16,27 +16,22 @@ export const CoreBillingView: React.FC<Props> = ({ showToast = (_message: string
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const [billingInterval, setBillingInterval] = useState<'monthly'|'annual'>('monthly');
 
-  const request = useCallback(async (path: string, init: RequestInit = {}) => {
-    const r = await fetch(`${getCoreApiUrl()}${path}`, { credentials: 'include', ...init, headers: { 'Content-Type': 'application/json', ...(init.headers || {}) } });
-    const b = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(b?.detail || `Core request failed (${r.status})`);
-    return b;
-  }, []);
+  const request = useCallback(async <T,>(path: string, init: RequestInit = {}) => requestCore<T>(path, init), []);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const [c,s,p,m,i,u] = await Promise.all([
-        request('/api/v1/commercial/customer-catalog'),
-        request('/api/v1/commercial/billing/summary'),
-        request('/api/v1/commercial/billing/profile'),
-        request('/api/v1/commercial/billing/payment-methods'),
-        request('/api/v1/commercial/billing/invoices'),
-        request('/api/v1/commercial/billing/usage'),
+        request<any>('/api/v1/commercial/customer-catalog'),
+        request<any>('/api/v1/commercial/billing/summary'),
+        request<any>('/api/v1/commercial/billing/profile'),
+        request<any>('/api/v1/commercial/billing/payment-methods'),
+        request<any>('/api/v1/commercial/billing/invoices'),
+        request<any>('/api/v1/commercial/billing/usage'),
       ]);
       setCatalog(c); setSummary(s); setProfile(p); setMethods(m.items || []); setInvoices(i.items || []); setUsage(u.items || []);
       const productCodes = [...new Set((c.plans || []).map((x:any) => x.productCode).filter(Boolean))];
-      const subEntries = await Promise.all(productCodes.map(async (code:any) => [code, await request(`/api/v1/commercial/billing/subscription/${encodeURIComponent(code)}`).catch(() => null)] as const));
+      const subEntries = await Promise.all(productCodes.map(async (code:any) => [code, await request<any>(`/api/v1/commercial/billing/subscription/${encodeURIComponent(code)}`).catch(() => null)] as const));
       setSubscriptions(Object.fromEntries(subEntries));
     } catch (e) { showToast(e instanceof Error ? e.message : 'Gagal memuat billing dari Core.'); }
     finally { setLoading(false); }
@@ -48,7 +43,7 @@ export const CoreBillingView: React.FC<Props> = ({ showToast = (_message: string
     if (!selectedPlan) return;
     try {
       const key = crypto.randomUUID() + crypto.randomUUID();
-      const r = await request('/api/v1/commercial/billing/checkout', { method: 'POST', headers: { 'Idempotency-Key': key }, body: JSON.stringify({ product_code: selectedPlan.productCode, plan_code: selectedPlan.planCode, billing_interval: billingInterval }) });
+      const r = await request<any>('/api/v1/commercial/billing/checkout', { method: 'POST', headers: { 'Idempotency-Key': key }, body: JSON.stringify({ product_code: selectedPlan.productCode, plan_code: selectedPlan.planCode, billing_interval: billingInterval }) });
       if (r.checkout_url) window.location.href = r.checkout_url; else showToast(`Checkout ${r.status || 'dibuat'}; provider belum mengembalikan URL.`);
     } catch (e) { showToast(e instanceof Error ? e.message : 'Checkout gagal.'); }
   };
@@ -59,17 +54,17 @@ export const CoreBillingView: React.FC<Props> = ({ showToast = (_message: string
     const currentAmount = Number((catalog?.plans || []).find((x:any) => x.productCode === sub.product_code && x.planCode === sub.plan_code)?.monthlyPrice || 0);
     const targetAmount = Number(plan.monthlyPrice || 0);
     const action = targetAmount > currentAmount ? 'upgrade' : targetAmount < currentAmount ? 'downgrade' : 'change';
-    try { await request('/api/v1/commercial/billing/subscription/change', { method:'POST', body:JSON.stringify({product_code:plan.productCode,plan_code:plan.planCode,action}) }); showToast(`Perubahan plan ${action} dikirim ke Core.`); setSelectedPlan(null); await load(); }
+    try { await request<any>('/api/v1/commercial/billing/subscription/change', { method:'POST', body:JSON.stringify({product_code:plan.productCode,plan_code:plan.planCode,action}) }); showToast(`Perubahan plan ${action} dikirim ke Core.`); setSelectedPlan(null); await load(); }
     catch(e){ showToast(e instanceof Error?e.message:'Perubahan plan gagal.'); }
   };
 
   const mutateSubscription = async (productCode: string, action: 'cancel'|'reactivate') => {
-    try { await request(`/api/v1/commercial/billing/subscription/${encodeURIComponent(productCode)}/${action}`, { method:'POST' }); showToast(`Subscription ${action} berhasil diproses Core.`); await load(); }
+    try { await request<any>(`/api/v1/commercial/billing/subscription/${encodeURIComponent(productCode)}/${action}`, { method:'POST' }); showToast(`Subscription ${action} berhasil diproses Core.`); await load(); }
     catch(e){ showToast(e instanceof Error?e.message:`Subscription ${action} gagal.`); }
   };
 
   const openPaymentSetup = async () => {
-    try { const b = await request('/api/v1/commercial/billing/payment-methods/setup'); if (b.setup_url) window.open(b.setup_url,'_blank','noopener,noreferrer'); else showToast('Payment provider belum mengembalikan setup URL.'); }
+    try { const b = await request<any>('/api/v1/commercial/billing/payment-methods/setup'); if (b.setup_url) window.open(b.setup_url,'_blank','noopener,noreferrer'); else showToast('Payment provider belum mengembalikan setup URL.'); }
     catch(e){ showToast(e instanceof Error?e.message:'Payment method setup gagal.'); }
   };
 
